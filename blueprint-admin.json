@@ -518,12 +518,8 @@
       }
     },
     {
-      "step": "mkdir",
-      "path": "/wordpress/sbl-src"
-    },
-    {
       "step": "writeFile",
-      "path": "/wordpress/sbl-src/setup.php",
+      "path": "/wordpress/sbl-setup.php",
       "data": {
         "resource": "url",
         "url": "https://raw.githubusercontent.com/salvatorewanjohi-a11y/scrubs-by-lucy-demo/main/setup.php"
@@ -531,7 +527,7 @@
     },
     {
       "step": "runPHP",
-      "code": "<?php require '/wordpress/sbl-src/setup.php';"
+      "code": "<?php require '/wordpress/sbl-setup.php';"
     }
   ]
 }
