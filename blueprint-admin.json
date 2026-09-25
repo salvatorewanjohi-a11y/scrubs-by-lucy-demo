@@ -518,6 +518,10 @@
       }
     },
     {
+      "step": "mkdir",
+      "path": "/wordpress/sbl-src"
+    },
+    {
       "step": "writeFile",
       "path": "/wordpress/sbl-src/setup.php",
       "data": {
