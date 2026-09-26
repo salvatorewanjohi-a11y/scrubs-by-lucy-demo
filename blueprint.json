@@ -23,17 +23,6 @@
     {
       "step": "installTheme",
       "themeData": {
-        "resource": "wordpress.org/themes",
-        "slug": "twentytwentyfive"
-      },
-      "options": {
-        "activate": false
-      },
-      "ifAlreadyInstalled": "skip"
-    },
-    {
-      "step": "installTheme",
-      "themeData": {
         "resource": "url",
         "url": "https://raw.githubusercontent.com/salvatorewanjohi-a11y/scrubs-by-lucy-demo/main/sbl.zip"
       },
