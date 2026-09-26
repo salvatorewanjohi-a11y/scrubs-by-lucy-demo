@@ -1,6 +1,7 @@
 {
   "$schema": "https://playground.wordpress.net/blueprint-schema.json",
   "landingPage": "/",
+  "login": false,
   "preferredVersions": {
     "php": "8.3",
     "wp": "latest"
@@ -10,10 +11,50 @@
   },
   "steps": [
     {
-      "step": "importWordPressFiles",
-      "wordPressFilesZip": {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "woocommerce"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "wordpress.org/themes",
+        "slug": "twentytwentyfive"
+      },
+      "options": {
+        "activate": false
+      },
+      "ifAlreadyInstalled": "skip"
+    },
+    {
+      "step": "installTheme",
+      "themeData": {
         "resource": "url",
-        "url": "https://raw.githubusercontent.com/salvatorewanjohi-a11y/scrubs-by-lucy-demo/main/site.zip"
+        "url": "https://raw.githubusercontent.com/salvatorewanjohi-a11y/scrubs-by-lucy-demo/main/sbl.zip"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "unzip",
+      "zipFile": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/salvatorewanjohi-a11y/scrubs-by-lucy-demo/main/images.zip"
+      },
+      "extractToPath": "/wordpress"
+    },
+    {
+      "step": "writeFile",
+      "path": "/wordpress/sbl-setup.php",
+      "data": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/salvatorewanjohi-a11y/scrubs-by-lucy-demo/main/setup.php"
       }
     },
     {
@@ -22,8 +63,17 @@
     },
     {
       "step": "writeFile",
+      "path": "/wordpress/wp-content/mu-plugins/sbl-demo.php",
+      "data": "<?php\n// Demo: photos are already web-sized, so don't make thumbnails.\nadd_filter( 'woocommerce_resize_images', '__return_false' );\nadd_filter( 'woocommerce_background_image_regeneration', '__return_false' );\n"
+    },
+    {
+      "step": "writeFile",
       "path": "/wordpress/wp-content/mu-plugins/sbl-storefront.php",
       "data": "<?php\n// Shop demo link: show the store as a customer sees it.\nadd_filter( 'show_admin_bar', '__return_false' );\n"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php define( 'SBL_FAST', true ); require '/wordpress/sbl-setup.php';"
     }
   ]
 }
