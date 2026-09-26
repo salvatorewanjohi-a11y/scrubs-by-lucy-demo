@@ -14,8 +14,7 @@
       "wordPressFilesZip": {
         "resource": "url",
         "url": "https://raw.githubusercontent.com/salvatorewanjohi-a11y/scrubs-by-lucy-demo/main/site.zip"
-      },
-      "pathInZip": "wordpress"
+      }
     },
     {
       "step": "login",
